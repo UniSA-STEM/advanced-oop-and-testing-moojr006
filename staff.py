@@ -1,8 +1,11 @@
 '''
-File: filename.py
+File: staff.py
 Description: A brief description of this Python module.
-Author: Billy Bizilis
-ID: 110100110
-Username: bizvy001
+Author: Jason Moore
+ID: 110456746
+Username: moojr006
 This is my own work as defined by the University's Academic Integrity Policy.
-''
+'''
+
+
+

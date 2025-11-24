@@ -8,8 +8,9 @@ This is my own work as defined by the University's Academic Integrity Policy.
 '''
 
 from abc import ABC, abstractmethod
-#from health_record import HealthRecord
+from healthrecord import HealthRecord
 
+# Must create healthrecord entries
 class Animal(ABC):
     diet_options = ["herbivore", "carnivore"]
 
@@ -21,7 +22,7 @@ class Animal(ABC):
         else:
             self.__diet = diet
         self.__enclosure = None
-        self.__health_record = None #HealthRecord()
+        self.__health_record = HealthRecord(self.__name)
         self.__is_sick = False
 
     def get_name(self) -> str:

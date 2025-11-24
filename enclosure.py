@@ -48,7 +48,7 @@ class Enclosure:
         if len(self.__animals) == 0:
             return f"There is no animal inside the enclosure"
         else:
-            return [animal.name for animal in self.__animals]
+            return [animal for animal in self.__animals]
 
     def __add_animal(self, animal: Animal):
         if isinstance(animal, Animal):

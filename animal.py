@@ -11,12 +11,18 @@ from abc import ABC, abstractmethod
 #from health_record import HealthRecord
 
 class Animal(ABC):
+    diet_options = ["herbivore", "carnivore"]
+
     def __init__(self, name: str, age: int, diet: str)-> None:
         self.__name = name
         self.__age = age
-        self.__diet = diet
+        if diet not in self.diet_options:
+            raise TypeError("Diet must be one of" + ", ".join(Animal.diet_options))
+        else:
+            self.__diet = diet
         self.__enclosure = None
         self.__health_record = None #HealthRecord()
+        self.__is_sick = False
 
     def get_name(self) -> str:
         return self.__name
@@ -45,6 +51,14 @@ class Animal(ABC):
         else:
             raise TypeError("Diet must be a string")
 
+    def get_is_sick(self):
+        return self.__is_sick
+
+    def set_is_sick(self, boolean: bool):
+        if isinstance(boolean, bool):
+            self.__is_sick = boolean
+        else:
+            raise ValueError("Must be a boolean value")
 
     #def get_enclosure(self) -> object:
         #return self.__enclosure
@@ -80,5 +94,6 @@ class Animal(ABC):
     name = property(get_name, set_name)
     age = property(get_age, set_age)
     diet = property(get_diet, set_diet)
+    is_sick = property(get_is_sick, set_is_sick)
 
 

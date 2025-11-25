@@ -7,16 +7,20 @@ Username: moojr006
 This is my own work as defined by the University's Academic Integrity Policy.
 '''
 from animal import Animal
+from mammal import Mammal
+from bird import Bird
+from reptile import Reptile
 
 #Still need to add some validation for size & cleanliness level
 class Enclosure:
-    environments = ["Grassy", "Aviary", "Vivarium"]
+    environments = ["grassy", "aviary", "vivarium"]
 
     def __init__(self, name: str, size: int, environment_type: str):
         self.__name = name
         self.__size = size
         self.__cleanliness_level = 10
         self.__animals = []
+        environment_type = environment_type.lower()
         if environment_type not in Enclosure.environments:
             raise ValueError(f"You must enter one of the following environments: {Enclosure.environments}")
         else:
@@ -52,7 +56,15 @@ class Enclosure:
 
     def __add_animal(self, animal: Animal):
         if isinstance(animal, Animal):
-            self.__animals.append(animal)
+            if isinstance(animal, Mammal) and self.environment_type == "grassy":
+                self.__animals.append(animal)
+            elif isinstance(animal, Bird) and self.environment_type == "aviary":
+                self.__animals.append(animal)
+            elif isinstance(animal, Reptile) and self.environment_type == "vivarium":
+                self.__animals.append(animal)
+            else:
+                raise ValueError(f"{animal} must be put in either a grassy, aviary, or vivarium environment")
+
         else:
             raise TypeError("You must enter an animal object.")
 
@@ -64,6 +76,9 @@ class Enclosure:
             self.__animals.remove(animal)
         else:
             raise TypeError("You must enter an animal object.")
+
+    def remove_animal(self, animal: Animal):
+        return self.__remove_animal(animal)
 
     def __report_status(self):
         return f"{self.get_name()} cleanliness level is {self.get_cleanliness_level()}"

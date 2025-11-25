@@ -19,15 +19,25 @@ class ZooKeeper(Staff):
         for enclosure in self.enclosures:
             enclosure.clean_enclosure()
             print(f"{enclosure.name} has been cleaned.")
-            for animal in enclosure.animals:
+            for animal in enclosure.animal:
                 if isinstance(animal, Animal) and animal in self.animals:
                     if animal.is_sick == True:
+                        animal.health_record.record_entry(f"{animal.name} has had a routine health check.", "Low")
                         print(f"Unable to feed because {animal.name} is sick.")
+                        animal.health_record.record_entry(f"{animal.name} is sick.", "High")
                     else:
+                        animal.health_record.record_entry(f"{animal.name} has had a routine health check.", "Low")
+                        animal.health_record.record_entry(f"{animal.name} is healthy.", "Low")
                         if animal.diet == "herbivore":
                             print(f"{animal.name} has been fed hay.")
+                            if enclosure.cleanliness_level > 0:
+                                enclosure.cleanliness_level -= 1
+                            animal.health_record.record_entry(f"{animal.name} has been fed hay.", "Low")
                         elif animal.diet == "carnivore":
                             print(f"{animal.name} has been fed meat.")
+                            if enclosure.cleanliness_level > 0:
+                                enclosure.cleanliness_level -= 1
+                            animal.health_record.record_entry(f"{animal.name} has been fed meat.", "Low")
 
 
 

@@ -10,6 +10,7 @@ from datetime import datetime
 
 
 class HealthRecord:
+    severity = ["low", "medium", "high"]
     def __init__(self, animal_name):
         self.__animal_name = animal_name
         self.__records = []
@@ -31,13 +32,16 @@ class HealthRecord:
         self.__records.append((title, severity, date_argument))
 
     def record_entry(self, title: str, severity: str):
+        severity = severity.lower()
+        if severity not in HealthRecord.severity:
+            raise ValueError(f"Invalid severity, enter one of these values: {HealthRecord.severity}")
         date_argument = datetime.today()
         self.__record_entry(title, severity, date_argument)
 
     def __report(self):
         count = 1
         health = []
-        health.append(f"Health report for {self.get_name()}")
+        health.append(f"\nHealth report for {self.get_name()}")
         health.append("=" * 70)
         for record in self.__records:
 

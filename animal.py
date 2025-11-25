@@ -17,6 +17,7 @@ class Animal(ABC):
     def __init__(self, name: str, age: int, diet: str)-> None:
         self.__name = name
         self.__age = age
+        diet = diet.lower()
         if diet not in self.diet_options:
             raise TypeError("Diet must be one of" + ", ".join(Animal.diet_options))
         else:
@@ -61,11 +62,11 @@ class Animal(ABC):
         else:
             raise ValueError("Must be a boolean value")
 
-    #def get_enclosure(self) -> object:
-        #return self.__enclosure
+    def get_enclosure(self) -> object:
+        return self.__enclosure
 
-    #def get_health_record(self) -> object:
-        #return self.__health_record
+    def get_health_record(self) -> object:
+        return self.__health_record
 
     def __eat(self):
         return f"{self.__name} is eating."
@@ -96,5 +97,6 @@ class Animal(ABC):
     age = property(get_age, set_age)
     diet = property(get_diet, set_diet)
     is_sick = property(get_is_sick, set_is_sick)
+    health_record = property(get_health_record)
 
 

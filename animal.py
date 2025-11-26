@@ -9,9 +9,8 @@ This is my own work as defined by the University's Academic Integrity Policy.
 
 from abc import ABC, abstractmethod
 from healthrecord import HealthRecord
-from enclosure import Enclosure
 
-# Must create healthrecord entries
+
 class Animal(ABC):
     diet_options = ["herbivore", "carnivore"]
 
@@ -23,7 +22,6 @@ class Animal(ABC):
             raise TypeError("Diet must be one of" + ", ".join(Animal.diet_options))
         else:
             self.__diet = diet
-        self.__enclosure = None
         self.__health_record = HealthRecord(self.__name)
         self.__is_sick = False
 
@@ -78,9 +76,6 @@ class Animal(ABC):
         except ValueError as e:
             print(f"Type error: {e}. Received {boolean} instead.")
 
-    def get_enclosure(self) -> Enclosure:
-        return self.__enclosure
-
     def get_health_record(self) -> HealthRecord:
         return self.__health_record
 
@@ -95,18 +90,6 @@ class Animal(ABC):
 
     def sleep(self):
         return self.__sleep()
-
-    def __assign_enclosure(self, enclosure):
-        try:
-            if isinstance(enclosure, Enclosure):
-                self.__enclosure = enclosure
-            else:
-                raise TypeError("Enclosure must be an instance of Enclosure")
-        except TypeError as e:
-            print(f"Type error: {e}. Received {enclosure} instead.")
-
-    def assign_enclosure(self, enclosure):
-        return self.__assign_enclosure(enclosure)
 
     @abstractmethod
     def make_sound(self):

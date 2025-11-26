@@ -7,7 +7,6 @@ Username: moojr006
 This is my own work as defined by the University's Academic Integrity Policy.
 '''
 from abc import ABC, abstractmethod
-
 from animal import Animal
 from enclosure import Enclosure
 
@@ -38,52 +37,62 @@ class Staff(ABC):
         return [enclosure for enclosure in self.__enclosures]
 
     def __add_animal(self, animal: Animal):
-        if not isinstance(animal, Animal):
-            raise TypeError(f"{animal} is not an animal.")
-        if animal not in self.__animals:
-            self.__animals.append(animal)
-            return f"{animal.name} has been added to {self.name}'s responsibility"
+        if animal in self.__animals:
+            return f"{animal} is already being looked after by this keeper."
         else:
-            raise ValueError(f"{animal.name} is already being looked after by this keeper.")
+            try:
+                if isinstance(animal, Animal):
+                    self.__animals.append(animal)
+                    return f"{animal.name} has been added to {self.name}'s responsibility"
+                else:
+                    raise TypeError(f"{animal} must be in Animal class")
+            except TypeError as e:
+                print(f"TypeError: {e}. Received {animal} instead.")
 
     def add_animal(self, animal: Animal):
         return self.__add_animal(animal)
 
     def __remove_animal(self, animal: Animal):
-        if not isinstance(animal, Animal):
-            raise TypeError(f"{animal} is not an animal.")
-        if animal in self.__animals:
-            self.__animals.remove(animal)
-            return f"{animal.name} has been removed from {self.name}'s responsibility"
-        else:
-            return f"{animal.name} is not being cared for by this keeper."
-
+        try:
+            if not isinstance(animal, Animal):
+                raise TypeError(f"{animal} is not an animal.")
+            else:
+                if animal in self.__animals:
+                    self.__animals.remove(animal)
+                    return f"{animal.name} has been removed from {self.name}'s responsibility"
+                else:
+                    return f"{animal.name} is not being cared for by this keeper."
+        except TypeError as e:
+            print(f"Type Error: {e}. Received {animal} instead.")
 
     def remove_animal(self, animal: Animal):
         return self.__remove_animal(animal)
 
     def __add_enclosure(self, enclosure: Enclosure):
-        if isinstance(enclosure, Enclosure):
-            if enclosure not in self.__enclosures:
-                self.__enclosures.append(enclosure)
-                return f"{enclosure.name} has been added to {self.name}'s responsibility"
+        try:
+            if isinstance(enclosure, Enclosure):
+                if enclosure not in self.__enclosures:
+                    self.__enclosures.append(enclosure)
+                    return f"{enclosure.name} has been added to {self.name}'s responsibility"
+                else:
+                    return f"{self.name} is already assigned to {enclosure.name}"
             else:
-                raise ValueError(f"{self.name} is already assigned to {enclosure.name}")
-        else:
-            raise TypeError("Enclosure must be an instance of Enclosure class.")
+                raise TypeError("Enclosure must be an instance of Enclosure class.")
+        except TypeError as e:
+            print(f"TypeError: {e}. Received {enclosure}")
 
     def add_enclosure(self, enclosure: Enclosure):
         return self.__add_enclosure(enclosure)
 
     def __remove_enclosure(self, enclosure: Enclosure):
-        if isinstance(enclosure, Enclosure):
-            if enclosure in self.__enclosures:
+        try:
+            if isinstance(enclosure, Enclosure) and enclosure in self.__enclosures:
                 self.__enclosures.remove(enclosure)
                 return f"{enclosure.name} has been removed from {self.name}'s responsibility"
             else:
-                raise ValueError(f"{enclosure.name} is not assigned to {self.name}")
-        else:
-            raise TypeError("Enclosure must be an instance of Enclosure class.")
+                raise Exception(f"Unable to perform action")
+        except Exception as e:
+            print(f"Error: {e}. Received {enclosure}.")
 
     def remove_enclosure(self, enclosure: Enclosure):
         return self.__remove_enclosure(enclosure)

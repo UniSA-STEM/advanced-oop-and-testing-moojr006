@@ -6,9 +6,7 @@ ID: 110456746
 Username: moojr006
 This is my own work as defined by the University's Academic Integrity Policy.
 '''
-#potential update to health record when noticing sick animals?
 from staff import Staff
-from enclosure import Enclosure
 from animal import Animal
 
 class ZooKeeper(Staff):
@@ -30,11 +28,13 @@ class ZooKeeper(Staff):
                         animal.health_record.record_entry(f"{animal.name} is healthy.", "Low")
                         if animal.diet == "herbivore":
                             print(f"{animal.name} has been fed hay.")
+                            print(animal.eat())
                             if enclosure.cleanliness_level > 0:
                                 enclosure.cleanliness_level -= 1
                             animal.health_record.record_entry(f"{animal.name} has been fed hay.", "Low")
                         elif animal.diet == "carnivore":
                             print(f"{animal.name} has been fed meat.")
+                            print(animal.eat())
                             if enclosure.cleanliness_level > 0:
                                 enclosure.cleanliness_level -= 1
                             animal.health_record.record_entry(f"{animal.name} has been fed meat.", "Low")

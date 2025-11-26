@@ -20,6 +20,7 @@ class Enclosure:
         self.__size = size
         self.__cleanliness_level = 10
         self.__animals = []
+        self.__capacity = max(1, self.__size // 10)
         environment_type = environment_type.lower()
         if environment_type not in Enclosure.environments:
             raise ValueError(f"You must enter one of the following environments: {Enclosure.environments}")
@@ -55,27 +56,38 @@ class Enclosure:
             return [animal for animal in self.__animals]
 
     def __add_animal(self, animal: Animal):
-        if isinstance(animal, Animal):
-            if isinstance(animal, Mammal) and self.environment_type == "grassy":
-                self.__animals.append(animal)
-            elif isinstance(animal, Bird) and self.environment_type == "aviary":
-                self.__animals.append(animal)
-            elif isinstance(animal, Reptile) and self.environment_type == "vivarium":
-                self.__animals.append(animal)
-            else:
-                raise ValueError(f"{animal} must be put in either a grassy, aviary, or vivarium environment")
-
+        if len(self.__animals) < self.__capacity:
+            try:
+                if isinstance(animal, Animal):
+                        try:
+                            if isinstance(animal, Mammal) and self.environment_type == "grassy":
+                                self.__animals.append(animal)
+                            elif isinstance(animal, Bird) and self.environment_type == "aviary":
+                                self.__animals.append(animal)
+                            elif isinstance(animal, Reptile) and self.environment_type == "vivarium":
+                                self.__animals.append(animal)
+                            else:
+                                raise ValueError(f"{animal.name} must be put in either a grassy, aviary, or vivarium environment")
+                        except ValueError as e:
+                            print(f"ValueError: {e}. Received {animal} instead.")
+                else:
+                    raise TypeError("You must enter an animal object")
+            except TypeError as e:
+                print(f"TypeError: {e}. Received {animal} instead.")
         else:
-            raise TypeError("You must enter an animal object.")
+            print(f"This enclosure is at capacity. Unable to add more animals.")
 
     def add_animal(self, animal: Animal):
         return self.__add_animal(animal)
 
     def __remove_animal(self, animal: Animal):
-        if isinstance(animal, Animal):
-            self.__animals.remove(animal)
-        else:
-            raise TypeError("You must enter an animal object.")
+        try:
+            if isinstance(animal, Animal):
+                self.__animals.remove(animal)
+            else:
+                raise TypeError("You must enter an animal object.")
+        except TypeError as e:
+            print(f"TypeError: {e}. Received {animal} instead.")
 
     def remove_animal(self, animal: Animal):
         return self.__remove_animal(animal)

@@ -23,7 +23,7 @@ class HealthRecord:
 
     def get_most_recent_record(self):
         if len(self.__records) == 0:
-            raise IndexError("No records found")
+            return None
         else:
             return self.__records[-1]
 
@@ -33,10 +33,17 @@ class HealthRecord:
 
     def record_entry(self, title: str, severity: str):
         severity = severity.lower()
-        if severity not in HealthRecord.severity:
-            raise ValueError(f"Invalid severity, enter one of these values: {HealthRecord.severity}")
-        date_argument = datetime.today()
-        self.__record_entry(title, severity, date_argument)
+        try:
+            if severity in HealthRecord.severity:
+                date_argument = datetime.today()
+                self.__record_entry(title, severity, date_argument)
+            else:
+                raise ValueError(f"Invalid severity")
+        except ValueError as e:
+            print(f"ValueError: {e}. Received {severity} instead.")
+            print(f"Valid severities are: {HealthRecord.severity}")
+
+
 
     def __report(self):
         count = 1
@@ -56,6 +63,7 @@ class HealthRecord:
 
 
     name = property(get_name)
+    records = property(get_records)
 
 
 

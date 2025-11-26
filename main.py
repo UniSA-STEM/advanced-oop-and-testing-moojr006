@@ -6,14 +6,10 @@ ID: 110456746
 Username: moojr006
 This is my own work as defined by the University's Academic Integrity Policy.
 '''
-import animal
-from animal import Animal
 from mammal import Mammal
 from bird import Bird
 from reptile import Reptile
 from enclosure import Enclosure
-from healthrecord import HealthRecord
-from staff import Staff
 from zookeeper import ZooKeeper
 from veterinarian import Veterinarian
 

@@ -11,9 +11,23 @@ from animal import Animal
 
 class ZooKeeper(Staff):
     def __init__(self, name, role):
+        """Instantiate ZooKeeper with name and role"""
         super().__init__(name, role)
 
     def perform_duties(self):
+        """Perform routine ZooKeeper duties.
+
+        Checks each animal if they are assigned to the ZooKeeper and
+        enclosure:
+            - Clean the enclosure
+            - If an animal is_sick updated health record and it will not be fed
+            - If an animal is not sick update health record
+            - Feed the animal in accordance with its diet:
+                - Herbivores eat hay
+                - Carnivores eat meat
+            - Reduces cleanliness level if animal has been fed
+            - Update health record to show animal has eaten
+        """
         for enclosure in self.enclosures:
             enclosure.clean_enclosure()
             print(f"{enclosure.name} has been cleaned.")

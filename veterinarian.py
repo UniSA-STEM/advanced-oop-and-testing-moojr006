@@ -11,9 +11,17 @@ from staff import Staff
 
 class Veterinarian(Staff):
     def __init__(self, name, role):
+        """Instantiate Veterinarian with name and role"""
         super().__init__(name, role)
 
     def perform_duties(self):
+        """Perform routine Veterinarian duties.
+
+        Checks each animal if they are assigned Veterinarian care:
+            - Treat animal if identified as sick.
+            - Update animal health record with all treatment steps.
+            - Updates animal is_sick boolean.
+        """
         for animal in self.animals:
             if animal.is_sick == True:
                 print(f"{animal.name} has been taken in for treatment.")

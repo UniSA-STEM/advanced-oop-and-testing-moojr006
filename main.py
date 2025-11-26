@@ -23,6 +23,22 @@ keeper_1 = ZooKeeper("Debra", "ZooKeeper")
 vet_1 = Veterinarian("Dale", "Veterinarian")
 
 def zoo_operation(animal, enclosure):
+    """Run through a zoo operation workflow
+
+    - Adds an animal into the appropriate enclosure.
+    - Adds employees to an enclosure.
+    - Demonstrates employee duties.
+    - Demonstrates employee action if animal is sick.
+    - Displays animals health record after each action.
+    - Self cleans after demonstration by remove object relationships.
+
+    Args:
+        animal is a child Animal object either Mammal, Bird, or Reptile.
+        enclosure is an Enclosure object.
+
+    Returns:
+        None
+    """
     enclosure.add_animal(animal)
     keeper_1.add_enclosure(enclosure)
     keeper_1.add_animal(animal)

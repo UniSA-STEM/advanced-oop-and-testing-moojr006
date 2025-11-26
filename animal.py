@@ -9,6 +9,7 @@ This is my own work as defined by the University's Academic Integrity Policy.
 
 from abc import ABC, abstractmethod
 from healthrecord import HealthRecord
+from enclosure import Enclosure
 
 # Must create healthrecord entries
 class Animal(ABC):
@@ -29,43 +30,58 @@ class Animal(ABC):
     def get_name(self) -> str:
         return self.__name
 
-    def set_name(self, name: str) -> None:
-        if isinstance(name, str):
-            self.__name = name
-        else:
-            raise TypeError("Name must be a string")
+    def set_name(self, name: str):
+        try:
+            if isinstance(name, str):
+                self.__name = name
+            else:
+                raise TypeError("Name must be a string")
+        except TypeError as e:
+            print(f"Type error: {e}. Received {name} instead.")
+
 
     def get_age(self) -> int:
         return self.__age
 
-    def set_age(self, age: int) -> None:
-        if isinstance(age, int):
-            self.__age = age
-        else:
-            raise TypeError("Age must be an integer")
+    def set_age(self, age: int):
+        try:
+            if isinstance(age, int):
+                self.__age = age
+            else:
+                raise TypeError("Age must be an integer")
+        except TypeError as e:
+            print(f"Type error: {e}. Received {age} instead.")
+
 
     def get_diet(self) -> str:
         return self.__diet
 
-    def set_diet(self, diet: str) -> None:
-        if isinstance(diet, str):
-            self.__diet = diet
-        else:
-            raise TypeError("Diet must be a string")
+    def set_diet(self, diet: str):
+        diet = diet.lower()
+        try:
+            if isinstance(diet, str) and diet in Animal.diet_options:
+                self.__diet = diet
+            else:
+                raise Exception("Invalid input")
+        except Exception as e:
+             print(f"Error: {e}. Received {diet} instead.")
 
     def get_is_sick(self):
         return self.__is_sick
 
     def set_is_sick(self, boolean: bool):
-        if isinstance(boolean, bool):
-            self.__is_sick = boolean
-        else:
-            raise ValueError("Must be a boolean value")
+        try:
+            if isinstance(boolean, bool):
+                self.__is_sick = boolean
+            else:
+                raise ValueError("Must be a boolean value")
+        except ValueError as e:
+            print(f"Type error: {e}. Received {boolean} instead.")
 
-    def get_enclosure(self) -> object:
+    def get_enclosure(self) -> Enclosure:
         return self.__enclosure
 
-    def get_health_record(self) -> object:
+    def get_health_record(self) -> HealthRecord:
         return self.__health_record
 
     def __eat(self):
@@ -81,10 +97,13 @@ class Animal(ABC):
         return self.__sleep()
 
     def __assign_enclosure(self, enclosure):
-        if isinstance(enclosure, Enclosure):
-            self.__enclosure = enclosure
-        else:
-            raise TypeError("Enclosure must be an instance of Enclosure")
+        try:
+            if isinstance(enclosure, Enclosure):
+                self.__enclosure = enclosure
+            else:
+                raise TypeError("Enclosure must be an instance of Enclosure")
+        except TypeError as e:
+            print(f"Type error: {e}. Received {enclosure} instead.")
 
     def assign_enclosure(self, enclosure):
         return self.__assign_enclosure(enclosure)

@@ -1,6 +1,6 @@
 '''
 File: healthrecord.py
-Description: A brief description of this Python module.
+Description: HealthRecord class that logs Animal data.
 Author: Jason Moore
 ID: 110456746
 Username: moojr006
@@ -15,7 +15,7 @@ class HealthRecord:
         """Instantiate HealthRecord name of animal that is being recorded.
 
         Initialise:
-            __records: An empty list of lists that is used for each log entry.
+            __records: An empty list of tuples that is used for each log entry.
         """
         self.__animal_name = animal_name
         self.__records = []

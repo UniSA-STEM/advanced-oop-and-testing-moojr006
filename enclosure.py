@@ -1,6 +1,6 @@
 '''
 File: enclosure.py
-Description: A brief description of this Python module.
+Description: Enclosure class that contains Animal & Staff objects.
 Author: Jason Moore
 ID: 110456746
 Username: moojr006

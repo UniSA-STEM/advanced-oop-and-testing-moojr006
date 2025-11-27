@@ -1,6 +1,6 @@
 '''
 File: staff.py
-Description: A brief description of this Python module.
+Description: Staff class that details common worker characteristics.
 Author: Jason Moore
 ID: 110456746
 Username: moojr006

@@ -1,6 +1,6 @@
 '''
 File: main.py
-Description: A brief description of this Python module.
+Description: Demonstrates how all classes interact.
 Author: Jason Moore
 ID: 110456746
 Username: moojr006

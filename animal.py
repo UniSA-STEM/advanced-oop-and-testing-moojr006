@@ -1,6 +1,6 @@
 '''
 File: animal.py
-Description: A brief description of this Python module.
+Description: Animal class that details natural characteristics.
 Author: Jason Moore
 ID: 110456746
 Username: moojr006

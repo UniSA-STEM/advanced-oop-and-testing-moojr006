@@ -1,6 +1,6 @@
 '''
 File: zookeeper.py
-Description: A brief description of this Python module.
+Description: ZooKeeper class that performs common duties.
 Author: Jason Moore
 ID: 110456746
 Username: moojr006
